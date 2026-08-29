@@ -148,7 +148,6 @@ ax2 = ax1.twinx()
 ax2.plot(np.arange(len(smooth(hB['acc']))) + 12, smooth(hB['acc']), color='navy',
          linewidth=2, label='Accuracy (smoothed)')
 ax2.set_ylabel('Mini-batch Accuracy', color='navy'); ax2.set_ylim(0, 1)
-plt.title(f'Training Dynamics (batch 128, cosine annealing)\nFinal test accuracy: {accB*100:.2f}%')
 fig.tight_layout(); plt.savefig(os.path.join(FIG, 'training_curve.png'), dpi=150); plt.close()
 
 # mnist.png: sample predictions
@@ -164,7 +163,6 @@ for i in range(8):
     ok = preds[i].item() == y_te[idx[i]].item()
     plt.title(f'P:{preds[i].item()} T:{y_te[idx[i]].item()}', color='green' if ok else 'red')
     plt.axis('off')
-plt.suptitle('Model Predictions on Test Set', y=1.05)
 plt.savefig(os.path.join(FIG, 'mnist.png'), dpi=150, bbox_inches='tight'); plt.close()
 
 # pca_components.png
@@ -173,7 +171,6 @@ for i in range(5):
     plt.subplot(1, 5, i + 1)
     plt.imshow(pca12.components_[i].reshape(28, 28), cmap='RdBu', vmin=-0.2, vmax=0.2)
     plt.title(f'PC {i+1}'); plt.axis('off')
-plt.suptitle('Input Structure: Top 5 PCA Components (Red: Positive, Blue: Negative)', y=1.08)
 plt.tight_layout(); plt.savefig(os.path.join(FIG, 'pca_components.png'), dpi=150,
                                 bbox_inches='tight'); plt.close()
 
@@ -197,11 +194,10 @@ sz_hist = np.array(sz_hist)
 plt.figure(figsize=(12, 6))
 colors = plt.cm.viridis(np.linspace(0, 1, 6))
 for s in range(6):
-    plt.plot(sz_hist[:, s], marker='o', markersize=4, label=f'Spin {s}', color=colors[s], alpha=0.8)
+    plt.plot(sz_hist[:, s], marker='o', markersize=4, label=f'Spin {s+1}', color=colors[s], alpha=0.8)
 plt.xticks(range(len(labels)), labels, rotation=45, fontsize=7)
 plt.axhline(0, color='black', linewidth=0.8, linestyle='--')
 plt.ylim(-0.6, 0.6)
-plt.title('Spin Dynamics Evolution (Test Sample 0)')
 plt.ylabel(r'Expectation Value $\langle S_z \rangle$'); plt.xlabel('Pulse Sequence (Layer-Link)')
 plt.legend(bbox_to_anchor=(1.02, 1), loc='upper left')
 plt.grid(True, linestyle=':', alpha=0.5); plt.tight_layout()
@@ -212,9 +208,8 @@ w = mB.in_w[0].detach().numpy()
 plt.figure(figsize=(10, 6))
 im = plt.imshow(w, cmap='RdBu_r', aspect='auto', vmin=-np.abs(w).max(), vmax=np.abs(w).max())
 plt.xticks(range(12), [f'PC{i+1}' for i in range(12)])
-plt.yticks(range(5), [f'Link {i+1}\n(S{i}-S{i+1})' for i in range(5)])
+plt.yticks(range(5), [f'Link {i+1}\n(S{i+1}-S{i+2})' for i in range(5)])
 plt.colorbar(im, label='Weight Magnitude')
-plt.title('Weight Heatmap: PCA Features to Quantum Pulses (Layer 1)')
 plt.xlabel('Input PCA Components'); plt.ylabel('Quantum Gate Links')
 for (jj, ii), val in np.ndenumerate(w):
     plt.text(ii, jj, f'{val:.2f}', ha='center', va='center', fontsize=7,
@@ -235,7 +230,6 @@ for i in range(10):
                  color='white' if cm[i, j] > cm.max() / 2 else 'black')
 plt.xticks(range(10)); plt.yticks(range(10))
 plt.xlabel('Predicted label'); plt.ylabel('True label')
-plt.title(f'Confusion Matrix on MNIST Test Set (10,000 samples)\nOverall accuracy: {accB*100:.2f}%')
 plt.colorbar(); plt.tight_layout()
 plt.savefig(os.path.join(FIG, 'confusion_matrix.png'), dpi=150); plt.close()
 
@@ -248,12 +242,11 @@ emb = TSNE(n_components=2, random_state=0, perplexity=30).fit_transform(feats[su
 plt.figure(figsize=(9, 7))
 scat = plt.scatter(emb[:, 0], emb[:, 1], c=y_te.numpy()[sub], cmap='tab10', s=8, alpha=0.8)
 plt.colorbar(scat, ticks=range(10), label='Digit Class')
-plt.title('t-SNE Visualization of Quantum Feature Space (11D -> 2D)')
 plt.xlabel('t-SNE component 1'); plt.ylabel('t-SNE component 2')
 plt.tight_layout(); plt.savefig(os.path.join(FIG, 'tsne.png'), dpi=150); plt.close()
 
 # signature.png: radar chart of class-averaged raw expectations
-feat_names = [f'Ex_{i}{i+1}' for i in range(5)] + [f'Sz_{i}' for i in range(6)]
+feat_names = [f'Ex {i+1}{i+2}' for i in range(5)] + [f'Sz {i+1}' for i in range(6)]
 angles = np.linspace(0, 2 * np.pi, 11, endpoint=False).tolist() + [0]
 fig, axes = plt.subplots(2, 5, figsize=(20, 8), subplot_kw={'projection': 'polar'})
 for d in range(10):
@@ -263,7 +256,6 @@ for d in range(10):
     ax.plot(angles, vals, color='teal'); ax.fill(angles, vals, color='teal', alpha=0.25)
     ax.set_xticks(angles[:-1]); ax.set_xticklabels(feat_names, fontsize=6)
     ax.set_title(f'Digit: {d}', fontsize=11)
-fig.suptitle('Quantum Feature Signatures per Digit (Raw Expectations)', fontsize=14)
 plt.tight_layout(); plt.savefig(os.path.join(FIG, 'signature.png'), dpi=150); plt.close()
 
 # stability figure
@@ -274,7 +266,6 @@ plt.plot(xs, curves.mean(0), color='tab:blue', label='Mean batch accuracy (5 see
 plt.fill_between(xs, curves.mean(0) - curves.std(0), curves.mean(0) + curves.std(0),
                  color='tab:blue', alpha=0.2, label='±1 SD')
 plt.xlabel('Training Steps'); plt.ylabel('Smoothed Mini-batch Accuracy'); plt.ylim(0, 1)
-plt.title(f'Stability over 5 Seeds — Test Accuracy {np.mean(stab)*100:.2f}% ± {np.std(stab)*100:.2f}%')
 plt.legend(); plt.grid(alpha=0.3); plt.tight_layout()
 plt.savefig(os.path.join(FIG, 'stability.png'), dpi=150); plt.close()
 
