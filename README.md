@@ -5,6 +5,7 @@ Code and numerical results for the paper:
 > **Hardware-Efficient Exchange-Only QML: Singlet-Triplet Spin Chains via
 > Inter-pair Coupling without Magnetic Gradients**
 > Yuichiro Minato (blueqat Inc.)
+> [arXiv:2608.29017](https://arxiv.org/abs/2608.29017)
 
 The Time-Encoded Exchange (TE-EX) protocol classifies MNIST digits with a
 6-spin Heisenberg chain controlled solely by exchange pulses — no magnetic
