@@ -2748,5 +2748,205 @@
   "F_singlet_init": {
     "test_acc": 0.8696,
     "seed": 42
+  },
+  "G_validation_selection": {
+    "split": "train 50000 / val 10000 (seed 0), PCA fit on the 50000 only",
+    "grid": {
+      "n_pca": [
+        8,
+        12,
+        16
+      ],
+      "n_layers": [
+        4,
+        6,
+        8
+      ],
+      "gamma": [
+        0.1,
+        0.3,
+        0.6
+      ]
+    },
+    "rows": [
+      {
+        "n_pca": 8,
+        "n_layers": 4,
+        "gamma": 0.1,
+        "val_acc": 0.8615
+      },
+      {
+        "n_pca": 8,
+        "n_layers": 4,
+        "gamma": 0.3,
+        "val_acc": 0.8612
+      },
+      {
+        "n_pca": 8,
+        "n_layers": 4,
+        "gamma": 0.6,
+        "val_acc": 0.852
+      },
+      {
+        "n_pca": 8,
+        "n_layers": 6,
+        "gamma": 0.1,
+        "val_acc": 0.8593
+      },
+      {
+        "n_pca": 8,
+        "n_layers": 6,
+        "gamma": 0.3,
+        "val_acc": 0.8604
+      },
+      {
+        "n_pca": 8,
+        "n_layers": 6,
+        "gamma": 0.6,
+        "val_acc": 0.8669
+      },
+      {
+        "n_pca": 8,
+        "n_layers": 8,
+        "gamma": 0.1,
+        "val_acc": 0.8583
+      },
+      {
+        "n_pca": 8,
+        "n_layers": 8,
+        "gamma": 0.3,
+        "val_acc": 0.8668
+      },
+      {
+        "n_pca": 8,
+        "n_layers": 8,
+        "gamma": 0.6,
+        "val_acc": 0.8681
+      },
+      {
+        "n_pca": 12,
+        "n_layers": 4,
+        "gamma": 0.1,
+        "val_acc": 0.8956
+      },
+      {
+        "n_pca": 12,
+        "n_layers": 4,
+        "gamma": 0.3,
+        "val_acc": 0.8984
+      },
+      {
+        "n_pca": 12,
+        "n_layers": 4,
+        "gamma": 0.6,
+        "val_acc": 0.8971
+      },
+      {
+        "n_pca": 12,
+        "n_layers": 6,
+        "gamma": 0.1,
+        "val_acc": 0.9001
+      },
+      {
+        "n_pca": 12,
+        "n_layers": 6,
+        "gamma": 0.3,
+        "val_acc": 0.9024
+      },
+      {
+        "n_pca": 12,
+        "n_layers": 6,
+        "gamma": 0.6,
+        "val_acc": 0.9034
+      },
+      {
+        "n_pca": 12,
+        "n_layers": 8,
+        "gamma": 0.1,
+        "val_acc": 0.8967
+      },
+      {
+        "n_pca": 12,
+        "n_layers": 8,
+        "gamma": 0.3,
+        "val_acc": 0.9083
+      },
+      {
+        "n_pca": 12,
+        "n_layers": 8,
+        "gamma": 0.6,
+        "val_acc": 0.9068
+      },
+      {
+        "n_pca": 16,
+        "n_layers": 4,
+        "gamma": 0.1,
+        "val_acc": 0.9067
+      },
+      {
+        "n_pca": 16,
+        "n_layers": 4,
+        "gamma": 0.3,
+        "val_acc": 0.9162
+      },
+      {
+        "n_pca": 16,
+        "n_layers": 4,
+        "gamma": 0.6,
+        "val_acc": 0.9133
+      },
+      {
+        "n_pca": 16,
+        "n_layers": 6,
+        "gamma": 0.1,
+        "val_acc": 0.9098
+      },
+      {
+        "n_pca": 16,
+        "n_layers": 6,
+        "gamma": 0.3,
+        "val_acc": 0.9243
+      },
+      {
+        "n_pca": 16,
+        "n_layers": 6,
+        "gamma": 0.6,
+        "val_acc": 0.9241
+      },
+      {
+        "n_pca": 16,
+        "n_layers": 8,
+        "gamma": 0.1,
+        "val_acc": 0.9081
+      },
+      {
+        "n_pca": 16,
+        "n_layers": 8,
+        "gamma": 0.3,
+        "val_acc": 0.9128
+      },
+      {
+        "n_pca": 16,
+        "n_layers": 8,
+        "gamma": 0.6,
+        "val_acc": 0.9266
+      }
+    ],
+    "best_on_val": {
+      "n_pca": 16,
+      "n_layers": 8,
+      "gamma": 0.6,
+      "val_acc": 0.9266
+    },
+    "test_acc_of_best": 0.9325,
+    "paper_config": {
+      "n_pca": 12,
+      "n_layers": 6,
+      "gamma": 0.3
+    }
+  },
+  "H_no_bn": {
+    "test_acc": 0.8905,
+    "seed": 42
   }
 }
