@@ -2948,5 +2948,258 @@
   "H_no_bn": {
     "test_acc": 0.8905,
     "seed": 42
+  },
+  "K_dla": {
+    "mz0_dim": 20,
+    "s_tot_blocks": [
+      5,
+      9,
+      5,
+      1
+    ],
+    "expected_dim_su5_su9_su5_u1": 129,
+    "dla_dim": 129,
+    "max_off_block_element": 9.168909222530842e-08,
+    "closes_at_symmetry_limit": true
+  },
+  "I_readout_ablation": {
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "psb_only_5_correlators": {
+      "test_accs": [
+        0.8954,
+        0.9014,
+        0.896,
+        0.8887,
+        0.8905
+      ],
+      "mean": 0.8944000000000001,
+      "std": 0.004477945957690859,
+      "n_features": 5
+    },
+    "sz_only_6_magnetizations": {
+      "test_accs": [
+        0.8697,
+        0.8645,
+        0.8811,
+        0.8741,
+        0.8662
+      ],
+      "mean": 0.87112,
+      "std": 0.005975416303488811,
+      "n_features": 6
+    },
+    "all_11_control": {
+      "test_accs": [
+        0.9062,
+        0.9064,
+        0.9072,
+        0.9013,
+        0.9061
+      ],
+      "mean": 0.9054400000000001,
+      "std": 0.002105801510114384,
+      "n_features": 11
+    }
+  },
+  "J_classical_controls": {
+    "note": "TE-EX linear readout = 88.08% with 390 encoder + 142 head = 532 params",
+    "tanh_width_sweep": {
+      "hidden6": {
+        "params": 160,
+        "test_accs": [
+          0.8072,
+          0.8097,
+          0.8149,
+          0.8092,
+          0.8082
+        ],
+        "mean": 0.80984,
+        "std": 0.002671778433927458
+      },
+      "hidden8": {
+        "params": 210,
+        "test_accs": [
+          0.8306,
+          0.8301,
+          0.8331,
+          0.8328,
+          0.8303
+        ],
+        "mean": 0.83138,
+        "std": 0.001295221988695361
+      },
+      "hidden11": {
+        "params": 285,
+        "test_accs": [
+          0.8384,
+          0.8388,
+          0.8384,
+          0.8443,
+          0.8402
+        ],
+        "mean": 0.84002,
+        "std": 0.0022400000000000098
+      },
+      "hidden15": {
+        "params": 385,
+        "test_accs": [
+          0.8545,
+          0.855,
+          0.8586,
+          0.8563,
+          0.8647
+        ],
+        "mean": 0.85782,
+        "std": 0.0037209676160912873
+      },
+      "hidden20": {
+        "params": 510,
+        "test_accs": [
+          0.8677,
+          0.8664,
+          0.8622,
+          0.8669,
+          0.861
+        ],
+        "mean": 0.8648399999999998,
+        "std": 0.0027045147439050976
+      },
+      "hidden30": {
+        "params": 760,
+        "test_accs": [
+          0.8798,
+          0.882,
+          0.89,
+          0.8843,
+          0.8834
+        ],
+        "mean": 0.8839,
+        "std": 0.003407051511204371
+      }
+    },
+    "linear_only": {
+      "params": 154,
+      "test_accs": [
+        0.8165,
+        0.8154,
+        0.815,
+        0.8135,
+        0.8118
+      ],
+      "mean": 0.8144399999999999,
+      "std": 0.0016329115101560254
+    },
+    "fixed_random_linear_map": {
+      "params": 532,
+      "per_map": {
+        "map0": [
+          0.8817,
+          0.8795,
+          0.8846
+        ],
+        "map1": [
+          0.8832,
+          0.8757,
+          0.8822
+        ],
+        "map2": [
+          0.8898,
+          0.8854,
+          0.886
+        ],
+        "map3": [
+          0.8928,
+          0.8942,
+          0.8846
+        ],
+        "map4": [
+          0.8863,
+          0.886,
+          0.889
+        ]
+      },
+      "mean": 0.8854,
+      "std": 0.004654746681256317,
+      "n_maps": 5,
+      "seeds_per_map": 3
+    },
+    "fixed_random_quad_map": {
+      "params": 532,
+      "per_map": {
+        "map0": [
+          0.9027,
+          0.9041,
+          0.8983
+        ],
+        "map1": [
+          0.9018,
+          0.9026,
+          0.9017
+        ],
+        "map2": [
+          0.9031,
+          0.9028,
+          0.9036
+        ],
+        "map3": [
+          0.8992,
+          0.9046,
+          0.9049
+        ],
+        "map4": [
+          0.8971,
+          0.8965,
+          0.9001
+        ]
+      },
+      "mean": 0.90154,
+      "std": 0.0025973832986296063,
+      "n_maps": 5,
+      "seeds_per_map": 3
+    }
+  },
+  "L_expressivity": {
+    "target": "random SU(5) on the S_tot=0 block, identity elsewhere",
+    "figure_of_merit": "|Tr(V^dag U)| / 20",
+    "dla_dim_needed": 129,
+    "gamma_bound": 0.3,
+    "rows": [
+      {
+        "n_layers": 6,
+        "n_params": 30,
+        "fidelity_free": 0.7962367121827542,
+        "fidelity_bounded": 0.7787635569386372
+      },
+      {
+        "n_layers": 13,
+        "n_params": 65,
+        "fidelity_free": 0.927098848661559,
+        "fidelity_bounded": 0.8361165637441728
+      },
+      {
+        "n_layers": 26,
+        "n_params": 130,
+        "fidelity_free": 0.9982434525059805,
+        "fidelity_bounded": 0.9638294247421939
+      },
+      {
+        "n_layers": 40,
+        "n_params": 200,
+        "fidelity_free": 0.9942581599132696,
+        "fidelity_bounded": 0.9988716867293499
+      },
+      {
+        "n_layers": 60,
+        "n_params": 300,
+        "fidelity_free": 0.9876130323515749,
+        "fidelity_bounded": 0.9784462680006827
+      }
+    ]
   }
 }
