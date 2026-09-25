@@ -125,6 +125,16 @@ if __name__ == '__main__':
         print(f'fixed random {kind:6s} OVERALL {np.mean(flat)*100:.2f}% '
               f'+/- {np.std(flat)*100:.2f}%', flush=True)
 
+    # (D) the chain itself with the linear readout, over the same five seeds, so that
+    #     the reference number is a mean like the controls (seed 42 = 88.08% of run_all.py)
+    from eo_core import FastEONet
+    accs, n_par = sweep(lambda: FastEONet(n_layers=6, n_inputs=12, gamma=0.3, head='linear',
+                                          init_scale=0.01, jbase_init='zeros'), range(42, 47))
+    out['teex_linear_5seeds'] = {'params': n_par, 'test_accs': accs,
+                                 'mean': float(np.mean(accs)), 'std': float(np.std(accs))}
+    print(f'TE-EX linear readout, 5 seeds ({n_par:3d} params): '
+          f'{np.mean(accs)*100:.2f}% +/- {np.std(accs)*100:.2f}%', flush=True)
+
     with open(os.path.join(OUT, 'results.json')) as f:
         results = json.load(f)
     results['J_classical_controls'] = out
